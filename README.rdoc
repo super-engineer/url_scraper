@@ -13,6 +13,10 @@ paste this line in your application.js file
 paste this line in your application.css file          
 
     *= require scraper
+
+Add following to your routes
+
+    match '/scrape_url' => "UrlScraper#scrape", :via => :post    
     
 == Using the plugin in a view
 
