@@ -4,13 +4,15 @@ Its a simple plugin for providing facebook style url scraper. Using url scraper 
 
 == Installation
 
-    gem install url_scraper
+Add to your gemfile 
 
-paste this line in your application.js file
+    gem "url_scraper"
+
+Paste this line in your application.js file
 
     //= require jquery.scraper
 
-paste this line in your application.css file          
+Paste this line in your application.css file
 
     *= require scraper
 
