@@ -1,0 +1,38 @@
+= Url Scraper
+Its a simple plugin for providing facebook style url scraper. Using url scraper you can convert any simple textarea into a smart textarea which auto detects url entered by users and fetches the content of the webpage and displays it on the page. This gem is built on top of gem 'opengraph' by Michael Bleigh. This gem uses the opengraph tags as well as uses meta, title and img tags (in case if opengraph tags are not present) to fetch information about a page.   
+
+
+== Installation
+
+    gem install url_scraper
+
+paste this line in your application.js file
+
+    //= require jquery.scraper
+
+paste this line in your application.css file          
+
+    *= require scraper
+    
+== Using the plugin in a view
+
+Create a text area or text field with id="scrape_url" and that's it.
+
+==  Advanced Usage
+
+    require 'url_scraper'
+    
+    movie = UrlScraper.fetch('http://www.rottentomatoes.com/m/1217700-kick_ass/')
+    
+    movie.title # => 'Kick-Ass'
+    movie.movie? # => true
+    movie.image # => 'http://images.rottentomatoes.com/images/movie/custom/00/1217700.jpg'
+    
+If you try to fetch Open Graph information for a URL that doesn't 
+have any, the <tt>fetch</tt> method will return values for title tag and other meta tags specified on the page.
+
+The UrlScraper::Object that is returned is just a Hash with accessors
+built into it, so you can examine what properties you've retrieved like so:
+
+    movie.keys # => ['type','image','title','url']
+
