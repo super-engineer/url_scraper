@@ -24,7 +24,7 @@ Add following to your routes
 
 Create a text area or text field with id="scrape_url" and that's it.
 
-==  Advanced Usage
+== Advanced Usage
 
     require 'url_scraper'
     
@@ -42,3 +42,8 @@ built into it, so you can examine what properties you've retrieved like so:
 
     movie.keys # => ['type','image','title','url']
 
+== Pending list
+
+1) Showing video on the page.
+
+2) Giving developers an easy way to integrate with rails forms.  
