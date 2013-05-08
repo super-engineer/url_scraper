@@ -2,7 +2,10 @@
 
 ul.bjqs{position:relative; list-style:none;padding:0;margin:0;overflow:hidden; display:none;}
 li.bjqs-slide{position:absolute; display:none;}
-ul.bjqs-controls{list-style:none;margin:0;padding:0;z-index:9999;}
+ul.bjqs-controls{list-style:none;margin:0;padding:6px;z-index:9999;padding-left: 0px;}
+ul.bjqs-controls li { float: left; }
+ul.bjqs-controls li a{ text-decoration: none; font-weight: bold; color: #fff; background: #333; padding:3px 5px; }
+ul.bjqs-controls li a:hover{ background: #555; }
 ul.bjqs-controls.v-centered li a{position:absolute;}
 ul.bjqs-controls.v-centered li.bjqs-next a{right:0;}
 ul.bjqs-controls.v-centered li.bjqs-prev a{left:0;}
