@@ -1,1 +1,70 @@
+/*
 *= require bjqs
+*/
+.scraped_content{
+  border: 1px solid #a3a3a3;
+  width: 500px;
+  height: 140px;
+  padding: 5px;
+}
+
+.scraped_content .scraped_title{
+  width: 290px;
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.scraped_content .scraped_title span{
+  
+}
+
+.scraped_content .scraped_title span:hover{
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.scraped_content .scraped_title input[type='text']{
+  border: 1px black solid;
+  width: 290px;
+}
+
+.scraped_content .scraped_description{
+  margin-left: 10px;
+  width: 290px;
+  height: 110px;
+  float: left;
+}
+
+.scraped_content .scraped_description span{
+  font-size: 80%;
+}
+
+.scraped_content .scraped_description span:hover{
+  cursor: pointer;
+  background-color: whitesmoke;
+
+}
+
+.scraped_content .scraped_description textarea{
+  width: 290px;
+  height: 65px
+}
+.scraped_content #image_slider{
+  display: block;
+  width: 170px;
+  float: left;
+}
+
+.scraped_content a{
+  display: block;
+  float: right;
+  margin-left: 5px;
+  padding: 2px 5px;
+}
+
+.scraped_content a:hover{
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+}

@@ -1,8 +1,6 @@
 //= require bjqs
 
 $(function(){
-  $('.hidden').hide();
-
   $('#scrape_url').keyup(function(event){
     if (event.keyCode == 32){
       url = linkify($(this).val());
@@ -80,29 +78,80 @@ $(function(){
           init_slider();
         }
 
+        //Add cross button
+        cross_button = document.createElement('a');
+        cross_button.className = "delete_node";
+        cross_button.innerHTML = "X";
+        $('.scraped_content').append(cross_button);
+
         //Add the title container
-        title = document.createElement('input');
-        title.setAttribute("type", "text");
-        title.setAttribute("value", data.title);                
+        title = document.createElement('div');
+        title.className = "scraped_title";
+        title_input_field = document.createElement('input');
+        title_input_field.setAttribute("type", "text");
+        title_input_field.setAttribute("value", data.title);
+        title_span = document.createElement('span');
+        title_span.innerHTML = data.title;
+        title.appendChild(title_input_field);
+        title.appendChild(title_span);
         $('.scraped_content').append(title);
+        $(title_input_field).hide();
 
         //Add the description container
-        description = document.createElement('textarea');
-        if(data.description.length > 0)
-          $(description).append(data.description);
-        else
-          description.setAttribute("placeholder", "This webpage doesn't provide any description. Go ahead and write your own.");                
-        $('.scraped_content').append(description);
+        if(data.description != null && data.description.length > 0){
+          description = document.createElement('div');
+          description.className = "scraped_description";
+          description_textarea = document.createElement('textarea');
+          description_textarea.innerHTML = data.description;
+          description_span = document.createElement('span');
+          description_span.innerHTML = data.description;
+          description.appendChild(description_textarea);
+          description.appendChild(description_span);
+          $('.scraped_content').append(description);
+          $(description_textarea).hide();          
+        }
+        // else
+        //   description_textarea.setAttribute("placeholder", "This webpage doesn't provide any description. Go ahead and write your own.");
       }
     });
   }
 
+  $(document).on("click", function(e){
+    $(".scraped_content span").show();
+    $(".scraped_content span").siblings().hide();
+  });
+
+  $(document).on("click", ".scraped_content textarea, .scraped_content input", function(e){
+    e.stopPropagation();
+  });
+
+  $(document).on("click", ".scraped_content span", function(e){
+    $(this).parents('div').find('input, textarea').hide();
+    $(this).parents('div').find('span').show();
+    $(this).hide();
+    $(this).siblings().show();
+    e.stopPropagation();
+  });
+
+  $(document).on("change", ".scraped_content .scraped_title input", function(){
+    $(this).siblings('span').html($(this).val());
+  });
+
+  $(document).on("change", ".scraped_content .scraped_description textarea", function(){
+    setTimeout(function () {
+      $(this).siblings('span').html($(this).html());
+    }, 100);
+  });
+  
   function init_slider(){
     $('.scraped_content #image_slider').bjqs({
-      'height' : 100,
+      'height' : 110,
       'width' : 170,
       'responsive' : true,
       'showmarkers' : false,
+      'centercontrols' : false,
+      'nexttext' : '>', // Text for 'next' button (can use HTML)
+      'prevtext' : '<', // Text for 'previous' button (can use HTML)
     });
   };
 
