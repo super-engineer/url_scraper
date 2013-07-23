@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'restclient'
 require 'logger'
 require 'thor'
+require 'cgi'
 
 module UrlScraper
   # Tell rails to load all assets
@@ -45,11 +46,19 @@ module UrlScraper
       page.description = doc.at_css("meta[name='description']")['content'] unless doc.at_css("meta[name='description']").nil?
     end
     if page.image.nil?
-      image_array = doc.css("img").take(5).collect{|img| URI.parse(uri).merge(URI.parse img['src'].to_s).to_s }
+      image_array = []
+      doc.css("img").each do |img|
+        next if img["src"].to_s.empty?
+        image = URI.escape(img["src"].strip)
+        image = image.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
+        image = URI.parse(uri).merge(URI.parse image.to_s).to_s
+        image_array << image
+      end
       page.image = image_array unless image_array.empty?
     end
     # return false if page.keys.empty?
     # return false unless page.valid? if strict
+    page.image = Array.wrap(page.image)
     page
     # return doc
   end
